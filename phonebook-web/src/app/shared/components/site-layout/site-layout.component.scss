@@ -1,0 +1,16 @@
+.site {
+  background-color: #ffffff;
+  min-height: 100vh;
+  width: 100%;
+
+  flex-direction: column;
+  display: flex;
+
+  &__main-content {
+    background-color: #c1c1c1;
+    align-self: center;
+    padding: 0.25rem;
+    width: 60%;
+    flex: 1;
+  }
+}

@@ -1,0 +1,30 @@
+.contacts-page {
+  &__cards-container {
+    max-height: calc(100vh - 64px - 62px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+
+    &__header {
+      justify-content: space-between;
+      align-items: center;
+      display: flex;
+
+      padding-bottom: 0.25rem;
+    }
+  }
+
+  .ant-card {
+    .ant-body-card {
+      padding: 0;
+    }
+  }
+}
+
+.anticon.anticon-delete:hover {
+  color: #ff4d4f;
+}

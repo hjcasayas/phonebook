@@ -1,0 +1,70 @@
+<div class="page contact-page">
+    <div nz-row [nzGutter]="4">
+        <div nz-col nzSpan="8" *ngIf="contacts?.length" class="contacts-page__cards-container">
+            <div class="contacts-page__cards-container__header">
+                <span>Contacts List</span>
+                <button nz-button nzType="primary" (click)="add()">Add</button>
+            </div>
+            <nz-card nzSize="small" *ngFor="let contact of contacts" (click)="selectContact(contact.id)">
+                <nz-card-meta [nzTitle]="contact.fullName" [nzDescription]="contact.phoneNumber"></nz-card-meta>
+            </nz-card>
+        </div>
+        <div nz-col nzSpan="16">
+            <!-- Contact Form -->
+            <div *ngIf="!selectedContact || isEditing; else contactDetails">
+                <nz-card nzTitle="Add Contact" [nzActions]="[actionSave, actionClear]">
+                    <form [formGroup]="contactForm" (ngSubmit)="save()">
+                        <div nz-row>
+                            <div nz-col nzSpan="12">
+                                <div>
+                                    <label>First Name:</label>
+                                </div>
+                                <input formControlName="firstName" />
+                            </div>
+                            <div nz-col nzSpan="12">
+                                <div>
+                                    <label>Last Name:</label>
+                                </div>
+                                <input formControlName="lastName" />
+                            </div>
+                        </div>
+                        <div nz-row>
+                            <div>
+                                <label>Phone Number:</label>
+                            </div>
+                            <input formControlName="phoneNumber" />
+                        </div>
+                        <ng-template #actionSave>
+                            <button nz-button nzType="primary" (click)="save()">Submit</button>
+                        </ng-template>
+                        <ng-template #actionClear>
+                            <button nz-button (click)="clear()">Clear</button>
+                        </ng-template>
+                    </form>
+                </nz-card>
+            </div>
+            <ng-template #contactDetails>
+                <div>
+                    <nz-card [nzTitle]="selectedContact.fullName" [nzActions]="[actionEdit, actionDelete]">
+                        <div nz-row>
+                            <div nz-col nzSpan="12"><span
+                                    class="contact__first-name">{{selectedContact.firstName}}</span>
+                            </div>
+                            <div nz-col nzSpan="12"><span class="contact__last-name">{{selectedContact.lastName}}</span>
+                            </div>
+                        </div>
+                        <div nz-row>
+                            <div nz-col><span class="contact__phone-number">{{selectedContact.phoneNumber}}</span></div>
+                        </div>
+                    </nz-card>
+                    <ng-template #actionEdit>
+                        <i nz-icon nzType="edit" (click)="edit()"></i>
+                    </ng-template>
+                    <ng-template #actionDelete>
+                        <i nz-icon nzType="delete" (click)="deleteContact(selectedContact.id)"></i>
+                    </ng-template>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
